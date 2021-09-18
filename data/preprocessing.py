@@ -1,3 +1,4 @@
+import kaggle
 import os
 import zipfile
 import cv2
@@ -5,6 +6,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from argparse import ArgumentParser
+import shutil
 
 
 def preprocessing(kaggle_user="monibaravan",
@@ -12,7 +14,7 @@ def preprocessing(kaggle_user="monibaravan",
                   dataset_path='blood-cells.zip',
                   data_path="dataset-master/dataset-master/JPEGImages",
                   label_csv_path="dataset-master/dataset-master/labels.csv",
-                  des_path="",
+                  des_path="", # defualt = empty(Local file)
                   test_size=0.3):
     print('If you are living in Iran, turn on you VPN!!!\n')
     os.environ['KAGGLE_USERNAME'] = kaggle_user  # username from the json file
@@ -77,6 +79,13 @@ def preprocessing(kaggle_user="monibaravan",
         save_path = os.path.join(des_path, 'dataset', 'test', cls, row['Image'])  # save path
         # print(row['Image'], cls)
         cv2.imwrite(save_path, img)  # save each image to its Category
+
+    # Removing extra files
+    shutil.rmtree('dataset-master')
+    shutil.rmtree('dataset2-master')
+    os.remove(dataset_path)
+
+
     print('preprocessing is done!')
 
 
