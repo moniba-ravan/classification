@@ -5,6 +5,6 @@ MODELS = dict(resnet50=Resnet50,
               )
 
 
-def load_model(model_name, **kwargs):
+def load_model(model_name, image_size):
     """Get models"""
-    return MODELS[model_name](**kwargs).get_model()
+    return MODELS[model_name](image_size).get_model()
