@@ -6,7 +6,7 @@ from params import get_args
 from data.data_loader import get_loader
 
 from keras.optimizers import Adam
-
+from models.resnet50 import Resnet50
 
 def train():
     model_name = sys.argv[2]

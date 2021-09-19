@@ -37,6 +37,5 @@ class Resnet50:
         model.add(BatchNormalization())
         model.add(Dense(4, activation='softmax'))
         model.summary()
-        model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
 
         return model
