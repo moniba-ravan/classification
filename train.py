@@ -1,18 +1,22 @@
 import sys
 
-
 from models import load_model
 from params import get_args
 from data.data_loader import get_loader
-from keras.optimizers import adam_v2 as Adam
+
+from keras.optimizers import Adam
+from models.resnet50 import Resnet50
+from sklearn.metrics import classification_report
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 def train():
-    # model_name = sys.argv[2]
-    # # model_name = 'resnet50'
-    # print(f"Chosen Model: {model_name}")
-    # args = get_args(model_name)
-    # print(f"Arguments: {args}")
-
+    model_name = sys.argv[2]
+    # model_name = 'resnet50'
+    print(f"Chosen Model: {model_name}")
+    args = get_args(model_name)
+    print(f"Arguments: {args}")
 
     # Loading Data
     train_loader, valid_loader, test_loader = get_loader(args.dataset_path,  # dataset dir path
@@ -42,6 +46,27 @@ def train():
                         validation_steps=valid_loader.n // args.batch_size
                         )
     print("Training Model is Done!")
+
+    # Evaluation
+    print('evaluation')
+
+    plt.plot(history.history['loss'], 'r--o')
+    plt.plot(history.history['val_loss'], 'b--o')
+    # plt.plot(history.history['acc'])
+    # plt.plot(history.history['val_acc'])
+    plt.show()
+
+    score = model.evaluate(test_loader, steps=test_loader.n // args.batch_size)
+
+    print(score)
+
+    predictions = model.predict(test_loader, steps=test_loader.n // args.batch_size + 1)
+    
+    val_preds = np.argmax(predictions, axis=-1)
+    vals_true = test_loader.classes
+    
+    print(classification_report(vals_true, val_preds))
+
 
 if __name__ == '__main__':
     train()
