@@ -4,16 +4,15 @@ import sys
 from models import load_model
 from params import get_args
 from data.data_loader import get_loader
-
-from keras.optimizers import Adam
-from models.resnet50 import Resnet50
+from keras.optimizers import adam_v2 as Adam
 
 def train():
-    model_name = sys.argv[2]
-    # model_name = 'resnet50'
-    print(f"Chosen Model: {model_name}")
-    args = get_args(model_name)
-    print(f"Arguments: {args}")
+    # model_name = sys.argv[2]
+    # # model_name = 'resnet50'
+    # print(f"Chosen Model: {model_name}")
+    # args = get_args(model_name)
+    # print(f"Arguments: {args}")
+
 
     # Loading Data
     train_loader, valid_loader, test_loader = get_loader(args.dataset_path,  # dataset dir path
