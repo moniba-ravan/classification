@@ -61,12 +61,10 @@ def train():
     print(score)
 
     predictions = model.predict(test_loader, steps=test_loader.n // args.batch_size + 1)
-    print(test_loader.n)
-    print(args.batch_size)
+    
     val_preds = np.argmax(predictions, axis=-1)
     vals_true = test_loader.classes
-    print(val_preds, len(val_preds))
-    print(vals_true, len(vals_true))
+    
     print(classification_report(vals_true, val_preds))
 
 
