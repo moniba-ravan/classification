@@ -34,7 +34,8 @@ def train():
     # Loading Model
     model = load_model(model_name=model_name,
                        image_size=args.target_size,
-                       n_classes=args.n_classes
+                       n_classes=args.n_classes,
+                       fine_tune=args.fine_tune
                        )
     print("Loading Model is Done!")
 
