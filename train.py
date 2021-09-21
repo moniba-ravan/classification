@@ -14,8 +14,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, Learn
 
 
 def train():
-    # model_name = sys.argv[2]
-    model_name = 'resnet50'
+    model_name = sys.argv[2]
     print(f"Chosen Model: {model_name}")
     args = get_args(model_name)
     print(f"Arguments: {args}")
