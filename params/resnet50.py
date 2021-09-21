@@ -13,6 +13,8 @@ def resnet50_args():
     parser.add_argument('--target-size', type=int, nargs=2, default=[224, 224], help='Image size for model.',
                         required=False)
     parser.add_argument('--n-classes', type=int, default=4, help='Define number of classes', required=False)
+    parser.add_argument('--fine_tune', type=bool, default=False, help='To Fine-tune Set True', required=False)
     parser.add_argument('--learning-rate', type=float, default=0.001, help='Set learning rate.', required=False)
+
 
     return parser.parse_args()
