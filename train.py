@@ -90,7 +90,6 @@ def train():
         print("Training Model is Done!")
 
         mlflow.log_param('batch size', args.batch_size)
-        mlflow.log_param('validation batch size', args.val_batch_size)
         mlflow.log_param('loss', 'Binary Cross-entropy')
         mlflow.log_param('epochs', args.epochs)
 
@@ -99,7 +98,7 @@ def train():
         mlflow.log_metric('train loss', history.history['loss'][0])
         mlflow.log_metric('val_loss', history.history['val_loss'][0])
 
-        mlflow.log_artifact()
+        # mlflow.log_artifact()
 
     # -------------------------------------------------------------------
     # Evaluation
