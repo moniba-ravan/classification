@@ -1,4 +1,4 @@
-from model_resnet50 import Resnet50
+from .resnet50 import Resnet50
 
 MODELS = dict(resnet50=Resnet50,
               # other models
