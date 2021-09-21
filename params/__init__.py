@@ -5,6 +5,9 @@ ARGUMENTS = dict(resnet50=resnet50_args,
                  )
 
 
-def get_args(model_name):
-    """Get Argument Parser"""
-    return ARGUMENTS[model_name]()
+def load_model(model_name, image_size, n_classes, fine_tune):
+    """Get models"""
+    return MODELS[model_name](image_size=image_size,
+                              n_classes=n_classes,
+                              fine_tune=fine_tune
+                              ).get_model()
