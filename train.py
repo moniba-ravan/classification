@@ -1,8 +1,7 @@
+import sys
 from models import load_model
 from params import get_args
 from data.data_loader import get_loader
-
-
 from tensorflow.keras.optimizers import Adam, Adagrad, RMSprop
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.utils import class_weight
@@ -10,8 +9,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, LearningRateScheduler
 import mlflow
+from utils.callbacks import get_callbacks
+from utils.utils import get_gpu_grower
+
+get_gpu_grower()
 
 
 def train():
@@ -47,23 +49,7 @@ def train():
                                                       y_train)
     class_weights = dict(enumerate(class_weights))
     # print(f'Class weights: {class_weights}')
-
-    # Call Backs
-    checkpoint_path = ''
-    checkpoint = ModelCheckpoint(filepath=checkpoint_path,
-                                 monitor='val_loss',
-                                 save_best_only=True,
-                                 mode='min',
-                                 save_weights_only=False,
-                                 )
-
-    reduce_lr = ReduceLROnPlateau(monitor='val_loss',
-                                  factor=0.9,  # new_lr = lr * factor
-                                  patience=10,  # number of epochs with no improvment
-                                  min_lr=0.0001,  # lower bound on the learning rate
-                                  mode='min',
-                                  verbose=1
-                                  )
+    checkpoint, reduce_lr, early_stopping = get_callbacks('weights/models.h5', early_stopping_p=5)
 
     # -------------------------------------------------------------------
     mlflow.set_experiment(str(model_name))
@@ -71,11 +57,10 @@ def train():
     ex_id = experiment.experiment_id
 
     with mlflow.start_run(run_name=str(model_name), experiment_id=str(ex_id)) as run:
-
         # Training
         opt = Adam(learning_rate=args.learning_rate)
         model.compile(optimizer=opt,
-                      loss='categorical_crossentropy', # arg
+                      loss='categorical_crossentropy',  # arg
                       metrics=['acc']
                       )
         print("Training Model...")
@@ -106,8 +91,6 @@ def train():
     predictions = model.predict(test_loader, steps=test_loader.n // args.batch_size + 1)
     y_pred = np.argmax(predictions, axis=-1)
     y_true = test_loader.classes
-    # print(f'y_pred: {len(y_preds)}')
-    # print(f'y_true: {len(y_true)}')
 
     # Metrics: Train: Loss plot
     plt.plot(history.history['loss'], 'b-', label="Train")
