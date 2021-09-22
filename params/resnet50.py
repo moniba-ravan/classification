@@ -15,5 +15,6 @@ def resnet50_args():
     parser.add_argument('--n-classes', type=int, default=4, help='Define number of classes', required=False)
     parser.add_argument('--fine_tune', type=bool, default=False, help='To Fine-tune Set True', required=False)
     parser.add_argument('--learning-rate', type=float, default=0.001, help='Set learning rate.', required=False)
+    parser.add_argument('--model_path', type=str, default="weights", help='model path', required=False)
 
     return parser.parse_args()
