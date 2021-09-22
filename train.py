@@ -20,7 +20,7 @@ def train():
     args = get_args(model_name)
     print(f"Arguments: {args}")
 
-    id_ = model_name + str(datetime.now().date()) + "_" + str(datetime.now().time())
+    id_ = model_name + "_" + str(datetime.now().date()) + "_" + str(datetime.now().time())
     weight_path = join('weights', id_) + ".h5"
     mlflow_handler = MLFlowHandler(model_name=model_name, run_name=id_)
     mlflow_handler.start_run(args)
