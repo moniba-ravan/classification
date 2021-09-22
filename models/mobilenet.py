@@ -29,6 +29,6 @@ class MobileNet:
         x = Dense(1024, activation='relu')(x)
         x = Dense(1024, activation='relu')(x)  # dense layer 2
         x = Dense(512, activation='relu')(x)  # dense layer 3
-        preds = Dense(self.n_classes, activation='softmax')(x)  # final layer with softmax activation
-        model = Model(inputs=base_model.input, outputs=preds)
+        x = Dense(self.n_classes, activation='softmax')(x)  # final layer with softmax activation
+        model = Model(inputs, x)
         return model
