@@ -1,7 +1,10 @@
+from .mobilenet import MobileNet
 from .resnet50 import Resnet50
 
 MODELS = dict(resnet50=Resnet50,
+              mobilenet=MobileNet
               # other models
+
               )
 
 
