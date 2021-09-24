@@ -10,6 +10,7 @@ dist
 /data/stage1_train.zip
 /data/stage1_test.zip
 /dataset
+/weights
 mlruns
 *.zip
 *.tar
