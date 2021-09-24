@@ -7,8 +7,8 @@ from tensorflow.keras.layers import Dropout
 
 
 class MobileNet:
-    def __init__(self, img_w=200, img_h=200, n_classes=4, channels=3, **kwargs):
-        self.input_shape = (img_w, img_h, channels)
+    def __init__(self, image_size=[200,200], n_classes=4, channels=3, **kwargs):
+        self.input_shape = (image_size[0], image_size[1], channels)
         self.n_classes = n_classes
 
     def get_model(self) -> Model:

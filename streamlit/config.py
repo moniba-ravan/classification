@@ -6,7 +6,8 @@ MODELS_TO_ADDR = {
 
 MODELS_TO_ARGS = {
     "mobilenet": {
-        'input_shape': (200, 200, 3)
+        'input_shape': (200, 200, 3),
+        'compile': True
     },
     "resnet50": {
         'input_shape': (200, 200, 3)
