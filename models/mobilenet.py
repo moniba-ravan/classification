@@ -3,6 +3,7 @@ import tensorflow.keras as keras
 from tensorflow.keras import Model, Input
 from tensorflow.keras.layers import GlobalAveragePooling2D, Dense
 from tensorflow.keras.applications.mobilenet import preprocess_input
+from tensorflow.keras.layers import Dropout
 
 
 class MobileNet:
@@ -27,7 +28,9 @@ class MobileNet:
         x = GlobalAveragePooling2D()(x)
         # we add dense layers so that the model can learn more complex functions and classify for better results.
         x = Dense(1024, activation='relu')(x)
+        x = Dropout(rate=0.3)(x)
         x = Dense(1024, activation='relu')(x)  # dense layer 2
+        x = Dropout(rate=0.3)(x)
         x = Dense(512, activation='relu')(x)  # dense layer 3
         x = Dense(self.n_classes, activation='softmax')(x)  # final layer with softmax activation
         model = Model(inputs, x)
