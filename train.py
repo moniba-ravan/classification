@@ -62,7 +62,6 @@ def train():
                         validation_data=valid_loader,
                         validation_batch_size=args.batch_size,
                         callbacks=[checkpoint, reduce_lr, mlflow_handler.mlflow_logger]
-                      #  callbacks=[checkpoint, reduce_lr, mlflow_handler.mlflow_logger]
                         )
     print("Training Model is Done!")
 
