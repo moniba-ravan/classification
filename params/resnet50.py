@@ -10,7 +10,7 @@ def resnet50_args():
                         required=False)
     parser.add_argument('--valid-size', type=int, default=0.3, help='Define validation size.', required=False)
     parser.add_argument('--batch-size', type=int, default=32, help='Define batch size.', required=False)
-    parser.add_argument('--target-size', type=int, nargs=2, default=[224, 224], help='Image size for model.',
+    parser.add_argument('--target-size', type=int, nargs=2, default=[200, 200], help='Image size for model.',
                         required=False)
     parser.add_argument('--n-classes', type=int, default=4, help='Define number of classes', required=False)
     parser.add_argument('--fine_tune', type=bool, default=False, help='To Fine-tune Set True', required=False)
