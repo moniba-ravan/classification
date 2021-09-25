@@ -20,9 +20,8 @@ class Detect:
         img = np.expand_dims(img, axis=0)
 
         result = self.model.predict(img)
-
         # apply necessary post-processing
-
+        result = np.argmax(result, axis=1)
 
         # return the results
         return result
