@@ -1,9 +1,10 @@
-from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from .mlflow_handler import MLFlowHandler
+from sklearn.metrics import classification_report, confusion_matrix
+
 
 
 def get_plots(model, test_loader, args, mlflow_handler: MLFlowHandler):
@@ -17,6 +18,8 @@ def get_plots(model, test_loader, args, mlflow_handler: MLFlowHandler):
     test_score = model.evaluate(test_loader, steps=test_loader.n // args.batch_size + 1)  # test data
     print(f'Test: loss= {test_score[0]}, Accuracy: {test_score[1]}')
 
+
+
     # Metrics: Confusion Matrix
     con_mat = confusion_matrix(y_true, y_pred)
     con_mat_norm = np.around(con_mat.astype('float') / con_mat.sum(axis=1)[:, np.newaxis], decimals=2)
@@ -28,3 +31,7 @@ def get_plots(model, test_loader, args, mlflow_handler: MLFlowHandler):
     plt.xlabel('Predicted label')
     plt.title('confusion matrix')
     mlflow_handler.add_figure(figure, 'images/confusion_matrix.png')
+    report = classification_report(y_true, y_pred)
+    print(report)
+
+    mlflow_handler.add_report(report, 'text/report.txt')
