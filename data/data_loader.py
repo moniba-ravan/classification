@@ -13,7 +13,7 @@ def get_loader(dataset_path,
 
     # train & validation dataset
     data_gen = ImageDataGenerator(
-        preprocessing_function=preprocess_input,
+        # preprocessing_function=preprocess_input,
         # rotation_range=30,
         # width_shift_range=0.2,
         # height_shift_range=0.2,
@@ -42,7 +42,7 @@ def get_loader(dataset_path,
 
     # test dataset
     data_gen = ImageDataGenerator(
-        preprocessing_function=preprocess_input,
+        # preprocessing_function=preprocess_input,
         # rotation_range=30,
         # width_shift_range=0.2,
         # height_shift_range=0.2,

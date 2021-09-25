@@ -1,3 +1,4 @@
+import os
 import sys
 from datetime import datetime
 from os.path import join
@@ -21,7 +22,9 @@ def train():
     print(f"Arguments: {args}")
 
     id_ = model_name + "_" + str(datetime.now().date()) + "_" + str(datetime.now().time())
-    weight_path = join('weights', id_) + ".h5"
+    # file with ':' in their name  not allowed in Windows.
+    id_ = id_.replace(':', '.')
+    weight_path = os.path.join(os.getcwd(), 'weights', id_) + ".h5"
     mlflow_handler = MLFlowHandler(model_name=model_name, run_name=id_)
     mlflow_handler.start_run(args)
 
