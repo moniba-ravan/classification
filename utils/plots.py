@@ -1,4 +1,4 @@
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -28,3 +28,7 @@ def get_plots(model, test_loader, args, mlflow_handler: MLFlowHandler):
     plt.xlabel('Predicted label')
     plt.title('confusion matrix')
     mlflow_handler.add_figure(figure, 'images/confusion_matrix.png')
+    report = classification_report(y_true, y_pred)
+    print(report)
+    mlflow_handler.add_report(report, 'text/report.txt')
+
