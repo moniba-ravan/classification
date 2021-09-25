@@ -26,6 +26,13 @@ def get_loader(dataset_path,
         # horizontal_flip = True,
         # vertical_flip = True,
         # rescale=1/255.,
+        rotation_range=20,
+        width_shift_range=0.1,
+        height_shift_range=0.1,
+        shear_range=0.1,
+        zoom_range=0.2,
+        horizontal_flip=True,
+        vertical_flip=True,
         validation_split=valid_size,
     )
 
@@ -55,6 +62,7 @@ def get_loader(dataset_path,
         # horizontal_flip = True,
         # vertical_flip = True,
         # rescale=1/255.,
+
     )
 
     test_gen = data_gen.flow_from_directory(os.path.join(dataset_dir, 'TEST_SIMPLE'),
