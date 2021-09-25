@@ -5,7 +5,7 @@ def mobilenet_args():
     parser = ArgumentParser()
 
     parser.add_argument('--model', type=str, default='mobilenet', help='Model name. Set it mobilenet.', required=False)
-    parser.add_argument('--epochs', type=int, default=10, help='Define number of training epochs.', required=False)
+    parser.add_argument('--epochs', type=int, default=1, help='Define number of training epochs.', required=False)
     parser.add_argument('--dataset-path', type=str, default='dataset2-master/dataset2-master/images', help='Path to folder containing dataset directory.',
                         required=False)
     parser.add_argument('--valid-size', type=int, default=0.3, help='Define validation size.', required=False)
