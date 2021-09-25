@@ -13,6 +13,7 @@ class Detect:
 
     def detect(self, img):
         # apply necessary preprocessing
+
         img = image.load_img(img, target_size=self.input_shape)
         img = image.img_to_array(img)
         img = np.expand_dims(img, axis=0)
@@ -20,6 +21,7 @@ class Detect:
         result = self.model.predict(img)
         # apply necessary post-processing
         result = np.argmax(result, axis=1)
+        result = ['EOSINOPHIL', 'LYMPHOCYTE', 'MONOCYTE', 'NEUTROPHIL'][result[0]]
 
         return result
 

@@ -42,6 +42,9 @@ def get_loader(dataset_path,
                                              class_mode='categorical',
                                              subset='training')
 
+
+    print(train_gen.class_indices)
+
     valid_gen = data_gen.flow_from_directory(os.path.join(dataset_dir, 'TRAIN'),
                                              target_size=target_size,
                                              batch_size=batch_size,
