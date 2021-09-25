@@ -9,8 +9,9 @@ def get_loader(dataset_path,
                batch_size,
                target_size
                ) -> Tuple[ImageDataGenerator, ImageDataGenerator, ImageDataGenerator]:
-    dataset_dir = os.path.join(dataset_path, 'dataset')
-
+  #  dataset_dir = os.path.join(dataset_path, 'dataset')
+    dataset_dir= dataset_path
+    print(dataset_dir)
     # train & validation dataset
     data_gen = ImageDataGenerator(
         #preprocessing_function=preprocess_input,
@@ -28,13 +29,13 @@ def get_loader(dataset_path,
         validation_split=valid_size,
     )
 
-    train_gen = data_gen.flow_from_directory(os.path.join(dataset_dir, 'train'),
+    train_gen = data_gen.flow_from_directory(os.path.join(dataset_dir, 'TRAIN'),
                                              target_size=target_size,
                                              batch_size=batch_size,
                                              class_mode='categorical',
                                              subset='training')
 
-    valid_gen = data_gen.flow_from_directory(os.path.join(dataset_dir, 'train'),
+    valid_gen = data_gen.flow_from_directory(os.path.join(dataset_dir, 'TRAIN'),
                                              target_size=target_size,
                                              batch_size=batch_size,
                                              class_mode='categorical',
@@ -56,7 +57,7 @@ def get_loader(dataset_path,
         # rescale=1/255.,
     )
 
-    test_gen = data_gen.flow_from_directory(os.path.join(dataset_dir, 'test'),
+    test_gen = data_gen.flow_from_directory(os.path.join(dataset_dir, 'TEST_SIMPLE'),
                                             target_size=target_size,
                                             batch_size=batch_size,
                                             class_mode='categorical'
