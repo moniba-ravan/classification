@@ -11,6 +11,7 @@ class MobileNet:
         self.input_shape = (image_size[0], image_size[1], channels)
         self.n_classes = n_classes
 
+
     def get_model(self) -> Model:
         #define unput and preprocess
         inputs = Input(self.input_shape)
@@ -33,5 +34,6 @@ class MobileNet:
         x = Dropout(rate=0.3)(x)
         x = Dense(512, activation='relu')(x)  # dense layer 3
         x = Dense(self.n_classes, activation='softmax')(x)  # final layer with softmax activation
+
         model = Model(inputs, x)
         return model

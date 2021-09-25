@@ -52,7 +52,7 @@ class MLFlowHandler:
         self.mlflow.log_figure(figure, artifact_path)
 
     def add_report(self, report, artifact_path):
-        self.mlflow.log_text(report , artifact_path)
+        self.mlflow.log_text(report, artifact_path)
 
     def add_weight(self, weight_path, artifact_path=None):
         if artifact_path is None:
