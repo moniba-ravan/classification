@@ -7,13 +7,12 @@ from tensorflow.keras.layers import Dropout
 
 
 class MobileNet:
-    def __init__(self, image_size=[200,200], n_classes=4, channels=3, **kwargs):
+    def __init__(self, image_size=(200, 200), n_classes=4, channels=3, **kwargs):
         self.input_shape = (image_size[0], image_size[1], channels)
         self.n_classes = n_classes
 
-
     def get_model(self) -> Model:
-        #define unput and preprocess
+        # define unput and preprocess
         inputs = Input(self.input_shape)
         x = preprocess_input(inputs)
 

@@ -11,7 +11,7 @@ from tensorflow.keras.applications.resnet50 import preprocess_input
 
 
 class Resnet50:
-    def __init__(self, image_size=[200,200], n_classes=4, fine_tune=False):
+    def __init__(self, image_size=(200, 200), n_classes=4, fine_tune=False):
         self.input_shape = (image_size[0], image_size[1], 3)
         self.n_classes = n_classes
         self.fine_tune = fine_tune
