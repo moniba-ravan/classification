@@ -29,10 +29,11 @@ def train():
     mlflow_handler.start_run(args)
 
     # Loading Data
-    train_loader, valid_loader, test_loader = get_loader(args.dataset_path,
-                                                         args.valid_size,
-                                                         args.batch_size,
-                                                         tuple(args.target_size)
+    train_loader, valid_loader, test_loader = get_loader(train_path=args.train_path,
+                                                         val_path=args.val_path,
+                                                         test_path=args.test_path,
+                                                         batch_size=args.batch_size,
+                                                         target_size=tuple(args.target_size)
                                                          )
     print("Loading Data is Done!")
 
@@ -50,19 +51,19 @@ def train():
     # -------------------------------------------------------------------
 
     # Training
-    opt = Adam(learning_rate=args.learning_rate)
+    opt = Adam(learning_rate=args.lr)
     model.compile(optimizer=opt,
-                  loss='categorical_crossentropy',  # arg
+                  loss='sparse_categorical_crossentropy',  # arg
                   metrics=['acc']
                   )
     print("Training Model...")
-    history = model.fit(train_loader,
-                        batch_size=args.batch_size,
-                        epochs=args.epochs,
-                        validation_data=valid_loader,
-                        validation_batch_size=args.batch_size,
-                        callbacks=[checkpoint, reduce_lr, mlflow_handler.mlflow_logger]
-                        )
+    model.fit(train_loader,
+              batch_size=args.batch_size,
+              epochs=args.epochs,
+              validation_data=valid_loader,
+              validation_batch_size=args.batch_size,
+              callbacks=[checkpoint, reduce_lr, mlflow_handler.mlflow_logger]
+              )
     print("Training Model is Done!")
 
     get_plots(model, test_loader, args, mlflow_handler)
